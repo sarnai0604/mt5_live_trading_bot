@@ -5,7 +5,7 @@ Tests order execution with correct filling mode detection
 import MetaTrader5 as mt5
 from datetime import datetime
 
-def test_order_execution(symbol="XAGUSD", volume=0.01):
+def test_order_execution(symbol="SILVER", volume=0.01):
     """Test order execution with minimal risk"""
     
     print("=" * 70)
@@ -205,7 +205,7 @@ if __name__ == "__main__":
     
     # Test with different symbols
     symbols_to_test = [
-        ("XAGUSD", 0.01),  # Silver - the one that failed
+        ("SILVER", 0.01),  # Silver - the one that failed
         # ("EURUSD", 0.01),  # Uncomment to test forex
         # ("XAUUSD", 0.01),  # Uncomment to test gold
     ]

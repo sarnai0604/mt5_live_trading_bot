@@ -208,7 +208,7 @@ ENABLE_PLOT = True                    # Show final chart with trades (requires m
 
 # === FOREX CONFIGURATION ===
 ENABLE_FOREX_CALC = True              # Enable advanced forex position calculations
-FOREX_INSTRUMENT = 'XAUUSD'           # Fixed to XAUUSD (Gold vs USD)
+FOREX_INSTRUMENT = 'GOLD'           # Fixed to XAUUSD (Gold vs USD)
 TEST_FOREX_MODE = False               # True: Quick 30-day test with forex calculations
 
 # === TRADING DIRECTION ===
@@ -411,7 +411,7 @@ class SunriseOgle(bt.Strategy):
         
         # === FOREX SETTINGS ===
         use_forex_position_calc=True,     # Enable advanced forex position calculations
-        forex_instrument='XAUUSD',        # Fixed to XAUUSD
+        forex_instrument='GOLD',        # Fixed to XAUUSD
         forex_base_currency='XAU',        # Base currency: XAU
         forex_quote_currency='USD',       # Quote currency: USD
         forex_pip_value=0.0001,           # Pip value for EURUSD
@@ -835,33 +835,33 @@ class SunriseOgle(bt.Strategy):
         """Validate forex configuration for USDCHF.
         
         Returns:
-            bool: True if configuration is valid for XAUUSD data
+            bool: True if configuration is valid for GOLD data
         """
         if not self.p.use_forex_position_calc:
             return True
             
-        # Check if data filename matches XAUUSD
+        # Check if data filename matches GOLD
         data_filename = getattr(self, '_data_filename', '')
-        if 'XAUUSD' not in data_filename.upper():
-            print(f"WARNING: Data file is {data_filename} but strategy is configured for XAUUSD")
+        if 'GOLD' not in data_filename.upper():
+            print(f"WARNING: Data file is {data_filename} but strategy is configured for GOLD")
             
-        # Validate price ranges for XAUUSD (Gold)
+        # Validate price ranges for GOLD (Gold)
         if hasattr(self.data, 'close') and len(self.data.close) > 0:
             current_price = float(self.data.close[0])
             if current_price < 1000 or current_price > 3000:
-                print(f"WARNING: Price {current_price} seems unusual for XAUUSD (expected range: 1000-3000)")
+                print(f"WARNING: Price {current_price} seems unusual for GOLD (expected range: 1000-3000)")
                 
-        # Check tick value consistency for XAUUSD
+        # Check tick value consistency for GOLD
         if self.p.forex_pip_value != 0.01:
-            print(f"INFO: XAUUSD typically uses tick value of 0.01, current setting: {self.p.forex_pip_value}")
+            print(f"INFO: GOLD typically uses tick value of 0.01, current setting: {self.p.forex_pip_value}")
             
         return True
     
     def _get_forex_instrument_config(self, instrument_name=None):
-        """Get configuration for XAUUSD instrument.
+        """Get configuration for GOLD instrument.
         
         Args:
-            instrument_name: Override instrument name (defaults to XAUUSD)
+            instrument_name: Override instrument name (defaults to GOLD)
             
         Returns:
             dict: Configuration dictionary for XAUUSD
@@ -871,14 +871,14 @@ class SunriseOgle(bt.Strategy):
             data_filename = getattr(self, '_data_filename', '').upper()
             
             # Try to detect instrument from filename
-            if 'XAUUSD' in data_filename:
-                instrument_name = 'XAUUSD'
+            if 'GOLD' in data_filename:
+                instrument_name = 'GOLD'
             else:
-                instrument_name = 'XAUUSD'  # Default to XAUUSD for this gold version
+                instrument_name = 'GOLD'  # Default to XAUUSD for this gold version
         
         # XAUUSD configuration only
         config = {
-            'XAUUSD': {  # Gold vs US Dollar
+            'GOLD': {  # Gold vs US Dollar
                 'base_currency': 'XAU',
                 'quote_currency': 'USD',
                 'pip_value': 0.01,           # 1 tick = $0.01
@@ -889,35 +889,35 @@ class SunriseOgle(bt.Strategy):
             }
         }
         
-        return config.get(instrument_name, config['XAUUSD'])
+        return config.get(instrument_name, config['GOLD'])
     
     def _apply_forex_config(self):
         """Apply forex configuration for USDCHF."""
         if not self.p.use_forex_position_calc:
             return
             
-        # Get configuration for XAUUSD
-        config = self._get_forex_instrument_config('XAUUSD')
+        # Get configuration for GOLD
+        config = self._get_forex_instrument_config('GOLD')
         
-        # Update parameters with XAUUSD configuration
+        # Update parameters with GOLD configuration
         self.p.forex_base_currency = config['base_currency']
         self.p.forex_quote_currency = config['quote_currency']
         
         # Store detected instrument for logging
-        self._detected_instrument = 'XAUUSD'
+        self._detected_instrument = 'GOLD'
         data_filename = getattr(self, '_data_filename', '').upper()
                 
-        # Apply XAUUSD configuration
+        # Apply GOLD configuration
         self.p.forex_pip_value = config['pip_value']
         self.p.forex_pip_decimal_places = config['pip_decimal_places']
         self.p.forex_lot_size = config['lot_size']
         self.p.forex_margin_required = config['margin_required']
         self.p.forex_spread_pips = config['typical_spread']
-        # Update the instrument parameter with XAUUSD
-        self.p.forex_instrument = 'XAUUSD'
+        # Update the instrument parameter with GOLD
+        self.p.forex_instrument = 'GOLD'
                 
         # Log forex configuration
-        print(f"CONFIGURED: XAUUSD from filename: {data_filename}")
+        print(f"CONFIGURED: GOLD from filename: {data_filename}")
         print(f"Forex Config: {self.p.forex_base_currency}/{self.p.forex_quote_currency}")
         print(f"Tick Value: {self.p.forex_pip_value} | Lot Size: {self.p.forex_lot_size:,} oz | Margin: {self.p.forex_margin_required}%")
 
@@ -2957,7 +2957,7 @@ if __name__ == '__main__':
     print(f"=== SUNRISE OGLE === (from {FROMDATE} to {TODATE})")
     if ENABLE_FOREX_CALC:
         print(f">> FOREX MODE ENABLED - Data: {DATA_FILENAME}")
-        print(f">> Instrument: XAUUSD (XAU/USD)")
+        print(f">> Instrument: GOLD (XAU/USD)")
     else:
         print(f" STANDARD MODE - Data: {DATA_FILENAME}")
 

@@ -29,7 +29,7 @@ except ImportError:
     SunriseOgleGBPUSD = None
 
 try:
-    from .sunrise_ogle_xauusd import SunriseOgle as SunriseOgleXAUUSD
+    from .sunrise_ogle_gold import SunriseOgle as SunriseOgleXAUUSD
 except ImportError:
     SunriseOgleXAUUSD = None
 
@@ -39,7 +39,7 @@ except ImportError:
     SunriseOgleAUDUSD = None
 
 try:
-    from .sunrise_ogle_xagusd import SunriseOgle as SunriseOgleXAGUSD
+    from .sunrise_ogle_silver import SunriseOgle as SunriseOgleXAGUSD
 except ImportError:
     SunriseOgleXAGUSD = None
 
@@ -62,8 +62,8 @@ __all__ = [
 STRATEGY_CLASSES = {
     'EURUSD': SunriseOgleEURUSD,
     'GBPUSD': SunriseOgleGBPUSD,
-    'XAUUSD': SunriseOgleXAUUSD,
+    'GOLD': SunriseOgleXAUUSD,
     'AUDUSD': SunriseOgleAUDUSD,
-    'XAGUSD': SunriseOgleXAGUSD,
+    'SILVER': SunriseOgleXAGUSD,
     'USDCHF': SunriseOgleUSDCHF
 }

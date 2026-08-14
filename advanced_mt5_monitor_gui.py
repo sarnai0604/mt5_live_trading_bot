@@ -734,7 +734,7 @@ class AdvancedMT5TradingMonitorGUI:
             self.terminal_log(f" Broker UTC Offset changed to: {offset_str}", "INFO", critical=True)
             self.terminal_log(f"   -> Saved to config/broker_timezone.json", "INFO", critical=True)
             self.terminal_log(f"   -> Time filter will convert broker time to UTC before checking", "INFO", critical=True)
-            self.terminal_log(f"   -> Affects: EURUSD, AUDUSD, XAGUSD, USDCHF (assets with time filter enabled)", "INFO", critical=True)
+            self.terminal_log(f"   -> Affects: EURUSD, AUDUSD, SILVER, USDCHF (assets with time filter enabled)", "INFO", critical=True)
         except Exception as e:
             self.terminal_log(f"[X] Failed to save UTC offset: {str(e)}", "ERROR", critical=True)
             

@@ -1,6 +1,6 @@
-"""Advanced Sunrise Strategy - XAGUSD Trading System
+"""Advanced Sunrise Strategy - SILVER Trading System
 ==================================================
-SILVER VERSION: This is a specialized version optimized exclusively for XAGUSD (Silver vs USD) trading.
+SILVER VERSION: This is a specialized version optimized exclusively for SILVER (Silver vs USD) trading.
 Adapted from the original strategy with Silver-specific parameters and configurations.
 
 🥈 SILVER-SPECIFIC OPTIMIZATIONS:
@@ -10,7 +10,7 @@ Adapted from the original strategy with Silver-specific parameters and configura
   - Optimized stop-loss and take-profit multipliers for Silver characteristics
   - Enhanced pullback detection for Silver's more volatile nature
 
-This strategy implements a sophisticated trading system optimized for XAGUSD with the following features:
+This strategy implements a sophisticated trading system optimized for SILVER with the following features:
 
 ENTRY MODES
 -----------
@@ -100,13 +100,13 @@ EXIT SYSTEM (SILVER-TUNED)
 
 MULTI-ASSET SUPPORT
 -------------------
-� PRECIOUS METAL: XAGUSD (Silver vs US Dollar)
+� PRECIOUS METAL: SILVER (Silver vs US Dollar)
    - Standard 5000 oz contract sizes
    - 0.001 tick values (3 decimal places)
    - 20:1 leverage with 5% margin
    - Higher volatility characteristics vs Gold
 
-🤖 CONFIGURATION: Instrument settings optimized for XAGUSD
+🤖 CONFIGURATION: Instrument settings optimized for SILVER
    - Tick values: 0.001
    - Lot sizes: 5,000 oz (typical Silver contract)
    - Margin requirements: 3.33%
@@ -218,7 +218,7 @@ ENABLE_PLOT = True                    # Show final chart with trades (requires m
 
 # === FOREX CONFIGURATION ===
 ENABLE_FOREX_CALC = True              # Enable advanced forex position calculations
-FOREX_INSTRUMENT = 'XAGUSD'           # Fixed to XAGUSD (Silver vs USD)
+FOREX_INSTRUMENT = 'SILVER'           # Fixed to SILVER (Silver vs USD)
 TEST_FOREX_MODE = False               # True: Quick 30-day test with forex calculations
 
 # === TRADING DIRECTION ===
@@ -272,7 +272,7 @@ LONG_USE_CANDLE_DIRECTION_FILTER = True     # Require previous candle bullish (c
 LONG_USE_ANGLE_FILTER = True                # Require minimum EMA slope angle for long entries
 LONG_MIN_ANGLE = 0.0                       # EXPANDED: Much wider angle range for more entries
 LONG_MAX_ANGLE = 50.0                       # EXPANDED: Much wider angle range for more entries
-LONG_ANGLE_SCALE_FACTOR = 10.0              # 🎯 XAGUSD: Scale factor for Silver price range (same as Gold)
+LONG_ANGLE_SCALE_FACTOR = 10.0              # 🎯 SILVER: Scale factor for Silver price range (same as Gold)
 
 # === LONG EMA POSITION FILTER ===
 LONG_USE_EMA_BELOW_PRICE_FILTER = False     # NEW: Require fast, medium & slow EMAs below price for long entries
@@ -284,7 +284,7 @@ SHORT_USE_CANDLE_DIRECTION_FILTER = True    # Require previous candle bearish (c
 SHORT_USE_ANGLE_FILTER = True               # Require minimum EMA slope angle for short entries
 SHORT_MIN_ANGLE = -90.0                     # EXPANDED: Much wider angle range for more entries
 SHORT_MAX_ANGLE = -20.0                     # EXPANDED: Much wider angle range for more entries
-SHORT_ANGLE_SCALE_FACTOR = 10.0             # � XAGUSD: Scale factor for Silver price range (same as Gold)
+SHORT_ANGLE_SCALE_FACTOR = 10.0             # � SILVER: Scale factor for Silver price range (same as Gold)
 
 # === SHORT EMA POSITION FILTER ===
 SHORT_USE_EMA_ABOVE_PRICE_FILTER = False    # NEW: Require fast, medium & slow EMAs above price for short entries
@@ -421,7 +421,7 @@ class SunriseOgle(bt.Strategy):
         
         # === FOREX SETTINGS ===
         use_forex_position_calc=True,     # Enable advanced forex position calculations
-        forex_instrument='XAGUSD',        # Fixed to XAGUSD
+        forex_instrument='SILVER',        # Fixed to SILVER
         forex_base_currency='XAU',        # Base currency: XAU
         forex_quote_currency='USD',       # Quote currency: USD
         forex_pip_value=0.0001,           # Pip value for EURUSD
@@ -852,18 +852,18 @@ class SunriseOgle(bt.Strategy):
             
         # Check if data filename matches XAUUSD
         data_filename = getattr(self, '_data_filename', '')
-        if 'XAUUSD' not in data_filename.upper():
-            print(f"WARNING: Data file is {data_filename} but strategy is configured for XAGUSD")
+        if 'SILVER' not in data_filename.upper():
+            print(f"WARNING: Data file is {data_filename} but strategy is configured for SILVER")
             
         # Validate price ranges for XAGUSD (Silver)
         if hasattr(self.data, 'close') and len(self.data.close) > 0:
             current_price = float(self.data.close[0])
             if current_price < 1000 or current_price > 3000:
-                print(f"WARNING: Price {current_price} seems unusual for XAGUSD (expected range: 15-50)")
+                print(f"WARNING: Price {current_price} seems unusual for SILVER (expected range: 15-50)")
                 
         # Check tick value consistency for XAUUSD
         if self.p.forex_pip_value != 0.01:
-            print(f"INFO: XAGUSD typically uses tick value of 0.001, current setting: {self.p.forex_pip_value}")
+            print(f"INFO: SILVER typically uses tick value of 0.001, current setting: {self.p.forex_pip_value}")
             
         return True
     
@@ -881,14 +881,14 @@ class SunriseOgle(bt.Strategy):
             data_filename = getattr(self, '_data_filename', '').upper()
             
             # Try to detect instrument from filename
-            if 'XAGUSD' in data_filename:
-                instrument_name = 'XAGUSD'
+            if 'SILVER' in data_filename:
+                instrument_name = 'SILVER'
             else:
-                instrument_name = 'XAGUSD'  # Default to XAGUSD for this silver version
+                instrument_name = 'SILVER'  # Default to SILVER for this silver version
         
         # XAUUSD configuration only
         config = {
-            'XAGUSD': {  # Silver vs US Dollar
+            'SILVER': {  # Silver vs US Dollar
                 'base_currency': 'XAG',
                 'quote_currency': 'USD',
                 'pip_value': 0.01,           # 1 tick = $0.01
@@ -899,35 +899,35 @@ class SunriseOgle(bt.Strategy):
             }
         }
         
-        return config.get(instrument_name, config['XAGUSD'])
+        return config.get(instrument_name, config['SILVER'])
     
     def _apply_forex_config(self):
         """Apply forex configuration for USDCHF."""
         if not self.p.use_forex_position_calc:
             return
             
-        # Get configuration for XAGUSD
-        config = self._get_forex_instrument_config('XAGUSD')
+        # Get configuration for SILVER
+        config = self._get_forex_instrument_config('SILVER')
         
-        # Update parameters with XAUUSD configuration
+        # Update parameters with SILVER configuration
         self.p.forex_base_currency = config['base_currency']
         self.p.forex_quote_currency = config['quote_currency']
         
         # Store detected instrument for logging
-        self._detected_instrument = 'XAUUSD'
+        self._detected_instrument = 'SILVER'
         data_filename = getattr(self, '_data_filename', '').upper()
                 
-        # Apply XAUUSD configuration
+        # Apply SILVER configuration
         self.p.forex_pip_value = config['pip_value']
         self.p.forex_pip_decimal_places = config['pip_decimal_places']
         self.p.forex_lot_size = config['lot_size']
         self.p.forex_margin_required = config['margin_required']
         self.p.forex_spread_pips = config['typical_spread']
-        # Update the instrument parameter with XAUUSD
-        self.p.forex_instrument = 'XAUUSD'
+        # Update the instrument parameter with SILVER
+        self.p.forex_instrument = 'SILVER'
                 
         # Log forex configuration
-        print(f"CONFIGURED: XAGUSD from filename: {data_filename}")
+        print(f"CONFIGURED: SILVER from filename: {data_filename}")
         print(f"Forex Config: {self.p.forex_base_currency}/{self.p.forex_quote_currency}")
         print(f"Tick Value: {self.p.forex_pip_value} | Lot Size: {self.p.forex_lot_size:,} oz | Margin: {self.p.forex_margin_required}%")
 
@@ -3005,7 +3005,7 @@ if __name__ == '__main__':
     print(f"=== SUNRISE OGLE === (from {FROMDATE} to {TODATE})")
     if ENABLE_FOREX_CALC:
         print(f">> FOREX MODE ENABLED - Data: {DATA_FILENAME}")
-        print(f">> Instrument: XAGUSD (XAG/USD)")
+        print(f">> Instrument: SILVER (XAG/USD)")
     else:
         print(f" STANDARD MODE - Data: {DATA_FILENAME}")
 
