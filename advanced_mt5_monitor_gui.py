@@ -102,10 +102,10 @@ if not sunrise_signal_adapter:
 
 ASSET_ALLOCATIONS = {
     'USDCHF': 0.15,   # 15% - Deflation hedge (safe haven currency)
-    'XAUUSD': 0.15,   # 15% - Inflation hedge (gold standard)
+    'GOLD': 0.15,   # 15% - Inflation hedge (gold standard)
     'GBPUSD': 0.12,   # 12% - Standard forex exposure
     'EURUSD': 0.12,   # 12% - Standard forex exposure
-    'XAGUSD': 0.12,   # 12% - Commodity/industrial metal
+    'SILVER': 0.12,   # 12% - Commodity/industrial metal
     'AUDUSD': 0.10,   # 10% - Commodity currency
     'EURJPY': 0.12,   # 12% - JPY cross (Asian session + carry)
     'USDJPY': 0.12,   # 12% - JPY core pair (BOJ policy sensitivity)
@@ -463,7 +463,7 @@ class AdvancedMT5TradingMonitorGUI:
         ttk.Label(control_frame, text="Chart Symbol:").pack(side=tk.LEFT)
         self.chart_symbol_var = tk.StringVar(value="EURUSD")
         chart_symbol_combo = ttk.Combobox(control_frame, textvariable=self.chart_symbol_var, 
-                                         values=["EURUSD", "XAUUSD", "GBPUSD", "AUDUSD", "XAGUSD", "USDCHF", "EURJPY", "USDJPY"],
+                                         values=["EURUSD", "GOLD", "GBPUSD", "AUDUSD", "SILVER", "USDCHF", "EURJPY", "USDJPY"],
                                          state="readonly", width=10)
         chart_symbol_combo.pack(side=tk.LEFT, padx=(5, 10))
         chart_symbol_combo.bind("<<ComboboxSelected>>", self.on_chart_symbol_change)
@@ -604,7 +604,7 @@ class AdvancedMT5TradingMonitorGUI:
 
     def load_strategy_configurations(self):
         """Load strategy configuration parameters"""
-        symbols = ["EURUSD", "GBPUSD", "XAUUSD", "AUDUSD", "XAGUSD", "USDCHF", "EURJPY", "USDJPY"]
+        symbols = ["EURUSD", "GBPUSD", "GOLD", "AUDUSD", "SILVER", "USDCHF", "EURJPY", "USDJPY"]
         
         for symbol in symbols:
             try:
@@ -997,7 +997,7 @@ class AdvancedMT5TradingMonitorGUI:
                     self.signal_manager = sunrise_signal_adapter.MultiSymbolSignalManager()
                     
                     # Add symbols
-                    symbols = ['XAUUSD', 'EURUSD', 'GBPUSD', 'AUDUSD', 'XAGUSD', 'USDCHF']
+                    symbols = ['GOLD', 'EURUSD', 'GBPUSD', 'AUDUSD', 'SILVER', 'USDCHF']
                     for symbol in symbols:
                         try:
                             self.signal_manager.add_symbol(symbol)
@@ -4260,7 +4260,7 @@ class AdvancedMT5TradingMonitorGUI:
         """Execute a trade in MT5
         
         Args:
-            symbol: Trading symbol (e.g., 'XAUUSD')
+            symbol: Trading symbol (e.g., 'GOLD')
             direction: 'LONG' or 'SHORT'
             price: Entry price
             config: Strategy configuration with risk parameters

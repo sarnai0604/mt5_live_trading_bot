@@ -136,7 +136,7 @@ def test_symbol_access():
             return False
         
         # Test common symbols
-        test_symbols = ['EURUSD', 'GBPUSD', 'USDJPY', 'XAUUSD', 'AUDUSD']
+        test_symbols = ['EURUSD', 'GBPUSD', 'USDJPY', 'GOLD', 'AUDUSD']
         available_symbols = []
         
         for symbol in test_symbols:

@@ -66,9 +66,9 @@ strategy_imports = {}
 strategies_to_import = [
     ('sunrise_ogle_eurusd', 'SunriseOgle', 'EURUSD'),
     ('sunrise_ogle_gbpusd', 'SunriseOgle', 'GBPUSD'),
-    ('sunrise_ogle_xauusd', 'SunriseOgle', 'XAUUSD'),
+    ('sunrise_ogle_xauusd', 'SunriseOgle', 'GOLD'),
     ('sunrise_ogle_audusd', 'SunriseOgle', 'AUDUSD'),
-    ('sunrise_ogle_xagusd', 'SunriseOgle', 'XAGUSD'),
+    ('sunrise_ogle_xagusd', 'SunriseOgle', 'SILVER'),
     ('sunrise_ogle_usdchf', 'SunriseOgle', 'USDCHF'),
     ('sunrise_ogle_eurjpy', 'SunriseOgle', 'EURJPY'),
     ('sunrise_ogle_usdjpy', 'SunriseOgleUSDJPY', 'USDJPY'),

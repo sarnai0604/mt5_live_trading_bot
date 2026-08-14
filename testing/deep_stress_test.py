@@ -89,7 +89,7 @@ def test_mt5_connection():
                 return False
                 
             # Test symbol info retrieval
-            symbols = ['EURUSD', 'XAUUSD', 'GBPUSD']
+            symbols = ['EURUSD', 'GOLD', 'GBPUSD']
             for symbol in symbols:
                 tick = mt5.symbol_info_tick(symbol)
                 if tick:
@@ -120,7 +120,7 @@ def test_signal_generation():
             return False
             
         # Test signal generation for multiple symbols
-        symbols = ['EURUSD', 'XAUUSD', 'GBPUSD', 'AUDUSD']
+        symbols = ['EURUSD', 'GOLD', 'GBPUSD', 'AUDUSD']
         signals_generated = 0
         
         sunrise_signal_adapter = dynamic_import("sunrise_signal_adapter", "src")
@@ -396,7 +396,7 @@ def test_file_operations():
                 'memory_usage': 45.6,
                 'thread_count': 5
             },
-            'symbols': ['EURUSD', 'XAUUSD', 'GBPUSD', 'AUDUSD'],
+            'symbols': ['EURUSD', 'GOLD', 'GBPUSD', 'AUDUSD'],
             'large_array': list(range(1000))
         }
         

@@ -239,7 +239,7 @@ def main():
         return
     
     # Test symbols from your strategies
-    symbols = ['EURUSD', 'GBPUSD', 'AUDUSD', 'USDCHF', 'XAUUSD', 'XAGUSD']
+    symbols = ['EURUSD', 'GBPUSD', 'AUDUSD', 'USDCHF', 'GOLD', 'SILVER']
     
     results = []
     for symbol in symbols:

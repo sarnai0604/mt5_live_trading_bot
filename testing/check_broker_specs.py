@@ -7,7 +7,7 @@ if not mt5.initialize():
     print("MT5 initialization failed")
     exit()
 
-symbols = ['EURUSD', 'GBPUSD', 'XAUUSD', 'AUDUSD', 'XAGUSD', 'USDCHF']
+symbols = ['EURUSD', 'GBPUSD', 'GOLD', 'AUDUSD', 'SILVER', 'USDCHF']
 
 print("=" * 100)
 print("BROKER SYMBOL SPECIFICATIONS")

@@ -18,10 +18,10 @@ if not mt5.initialize():
 # ═══════════════════════════════════════════════════════════════════
 ASSET_ALLOCATIONS = {
     'USDCHF': 0.20,   # 20% - Deflation hedge
-    'XAUUSD': 0.18,   # 18% - Inflation hedge
+    'GOLD': 0.18,   # 18% - Inflation hedge
     'GBPUSD': 0.16,   # 16% - Standard forex
     'EURUSD': 0.16,   # 16% - Standard forex
-    'XAGUSD': 0.15,   # 15% - Commodity metal
+    'SILVER': 0.15,   # 15% - Commodity metal
     'AUDUSD': 0.15,   # 15% - Commodity currency
 }
 
@@ -31,9 +31,9 @@ DEFAULT_RISK_PERCENT = 0.005  # 0.5% risk per trade
 ATR_MULTIPLIERS = {
     'EURUSD': {'sl': 1.5, 'tp': 10.0},
     'GBPUSD': {'sl': 2.5, 'tp': 10.0},
-    'XAUUSD': {'sl': 1.5, 'tp': 12.0},
+    'GOLD': {'sl': 1.5, 'tp': 12.0},
     'AUDUSD': {'sl': 2.0, 'tp': 10.0},
-    'XAGUSD': {'sl': 1.5, 'tp': 12.0},
+    'SILVER': {'sl': 1.5, 'tp': 12.0},
     'USDCHF': {'sl': 2.5, 'tp': 10.0},
 }
 
