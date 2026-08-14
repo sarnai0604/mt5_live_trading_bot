@@ -11,9 +11,9 @@ development environment and can be used for live trading without external depend
 Available Strategies:
 - sunrise_ogle_eurusd: EUR/USD trading strategy
 - sunrise_ogle_gbpusd: GBP/USD trading strategy  
-- sunrise_ogle_xauusd: Gold (XAU/USD) trading strategy
+- sunrise_ogle_gold: Gold (XAU/USD) trading strategy
 - sunrise_ogle_audusd: AUD/USD trading strategy
-- sunrise_ogle_xagusd: Silver (XAG/USD) trading strategy
+- sunrise_ogle_silver: Silver (XAG/USD) trading strategy
 - sunrise_ogle_usdchf: USD/CHF trading strategy
 """
 

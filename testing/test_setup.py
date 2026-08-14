@@ -183,9 +183,9 @@ def test_strategy_imports():
         strategies_to_test = [
             'sunrise_ogle_eurusd',
             'sunrise_ogle_gbpusd', 
-            'sunrise_ogle_xauusd',
+            'sunrise_ogle_gold',
             'sunrise_ogle_audusd',
-            'sunrise_ogle_xagusd',
+            'sunrise_ogle_silver',
             'sunrise_ogle_usdchf'
         ]
         
